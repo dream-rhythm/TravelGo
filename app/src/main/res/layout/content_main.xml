@@ -49,4 +49,12 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:hint="Enter password" />
+
+    <Button
+        android:text="@string/Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/key"
+        android:layout_alignParentStart="true"
+        android:id="@+id/Input_Enter" />
 </RelativeLayout>
