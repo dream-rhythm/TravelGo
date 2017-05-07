@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "41789339489",
+    "firebase_url": "https://travelgo-b7819.firebaseio.com",
+    "project_id": "travelgo-b7819",
+    "storage_bucket": "travelgo-b7819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41789339489:android:5814da9a5fc1759f",
+        "android_client_info": {
+          "package_name": "fcu.iecs.nicky.travelgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41789339489-shhmk9rgqco9h04e9rvrqdvetpta3mqq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fcu.iecs.nicky.travelgo",
+            "certificate_hash": "c876bb22448bff2fa2f04c037bc4a338106b59a9"
+          }
+        },
+        {
+          "client_id": "41789339489-r0oe8ro6qc5bjvtbevn8gmddv0otsanv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1b7jkVQU9Tro6YXtdr9AqZCYIefT4IuI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41789339489-r0oe8ro6qc5bjvtbevn8gmddv0otsanv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
