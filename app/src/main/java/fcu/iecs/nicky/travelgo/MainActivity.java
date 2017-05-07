@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     Button toLogin,toFindPlace,toFindFriend,toMyFriend,toMyGroup;
     TextView View_UserName;
     public static final int LoginActivityID=1000;
+    public static final int FindplaceID = 2000;
+    public static final String MyGroupID = "My group";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener toFindPlace_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent toFindPlacePage = new Intent();
+            toFindPlacePage.setClass(MainActivity.this,FindPlace.class);
+            startActivityForResult(toFindPlacePage,FindplaceID);
         }
     };
     View.OnClickListener toFindFriend_onclickListener= new View.OnClickListener() {
@@ -81,6 +85,18 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener toMyGroup_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(View_UserName.getText().toString().equals("尚未登入")){
+                Intent toNextPage = new Intent();
+                toNextPage.setClass(MainActivity.this,LoginActivity.class);
+                startActivityForResult(toNextPage,LoginActivityID);
+            }
+            else{
+                Intent toMyGroupPage = new Intent();
+                String userName = View_UserName.getText().toString();
+                toMyGroupPage.setClass(MainActivity.this,MyGroup.class);
+                toMyGroupPage.putExtra(userName,MyGroupID);
+                startActivity(toMyGroupPage);
+            }
 
         }
     };

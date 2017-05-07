@@ -21,6 +21,14 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyGroup"
+            android:label="@string/title_activity_my_group"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FindPlace"
+            android:label="@string/title_activity_find_place"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
