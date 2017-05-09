@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     View.OnClickListener login_onclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -75,8 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                     else{
                         Toast.makeText(LoginActivity.this,"登入失敗",Toast.LENGTH_LONG).show();
                     }
-
-
                 }
 
                 @Override

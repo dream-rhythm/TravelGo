@@ -70,18 +70,30 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(toFindPlacePage,FindplaceID);
         }
     };
+
     View.OnClickListener toFindFriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
         }
     };
+
     View.OnClickListener toMyFriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            if(View_UserName.getText().toString().equals("尚未登入")){
+                Intent toNextPage = new Intent();
+                toNextPage.setClass(MainActivity.this,LoginActivity.class);
+                startActivityForResult(toNextPage,LoginActivityID);
+            }
+            else{
+                Intent toMyfriendPage = new Intent();
+                toMyfriendPage.setClass(MainActivity.this,Myfriend.class);
+                startActivity(toMyfriendPage);
+            }
         }
     };
+
     View.OnClickListener toMyGroup_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {

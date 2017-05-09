@@ -4,4 +4,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_my_group">MyGroup</string>
     <string name="title_activity_find_place">FindPlace</string>
+    <string name="title_activity_myfriend">好友列表</string>
+    <string name="title_activity_new_friend">NewFriend</string>
 </resources>

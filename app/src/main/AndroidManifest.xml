@@ -29,6 +29,14 @@
         <activity
             android:name=".FindPlace"
             android:label="@string/title_activity_find_place"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Myfriend"
+            android:label="@string/title_activity_myfriend"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewFriend"
+            android:label="@string/title_activity_new_friend"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
