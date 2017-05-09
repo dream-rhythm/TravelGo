@@ -38,14 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         InputName = (EditText)findViewById(R.id.input_UserName);
         InputPassword=(EditText)findViewById(R.id.input_Password);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     View.OnClickListener login_onclickListener = new View.OnClickListener() {

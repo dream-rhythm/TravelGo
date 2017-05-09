@@ -18,8 +18,6 @@ public class Myfriend extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(R.layout.activity_myfriend);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -27,14 +25,7 @@ public class Myfriend extends AppCompatActivity {
         tonewfriend = (Button)findViewById(R.id.btn_newfriend);
         tonewfriend.setOnClickListener(tonewfriend_onclickListener);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
   View.OnClickListener tonewfriend_onclickListener= new View.OnClickListener() {
         @Override
