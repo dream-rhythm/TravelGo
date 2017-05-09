@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener toFindFriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Toast.makeText(MainActivity.this,"還沒做!!!",Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -116,14 +117,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case LoginActivityID:
-                Boolean isOk = data.getBooleanExtra("isOk",false);
-                if(isOk==true){
-                    String UserName = data.getStringExtra("UserName");
-                    View_UserName.setText(UserName);
-                    toLogin.setText("登出");
-                }
+        if(resultCode==RESULT_OK){
+            switch(requestCode){
+                case LoginActivityID:
+                    Boolean isOk = data.getBooleanExtra("isOk",false);
+                    if(isOk==true){
+                        String UserName = data.getStringExtra("UserName");
+                        View_UserName.setText(UserName);
+                        toLogin.setText("登出");
+                    }
+            }
         }
     }
 

@@ -12,18 +12,20 @@ import android.widget.Button;
 import static fcu.iecs.nicky.travelgo.MainActivity.MyGroupID;
 
 public class Myfriend extends AppCompatActivity {
-   // Button tonewfriend;
+    Button tonewfriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    //    tonewfriend = (Button)findViewById(R.id.btn_newfriend);
-    //    tonewfriend.setOnClickListener(tonewfriend_onclickListener);
+
 
         setContentView(R.layout.activity_myfriend);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        tonewfriend = (Button)findViewById(R.id.btn_newfriend);
+        tonewfriend.setOnClickListener(tonewfriend_onclickListener);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,15 +36,12 @@ public class Myfriend extends AppCompatActivity {
             }
         });
     }
- /*  View.OnClickListener tonewfriend_onclickListener= new View.OnClickListener() {
+  View.OnClickListener tonewfriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                if(tonewfriend.getText().toString()=="登入")
-                {
-                    Intent tonewfriendPage = new Intent();
-                    tonewfriendPage.setClass(Myfriend.this,NewFriend.class);
-                }
-
+            Intent nextPage = new Intent();
+            nextPage.setClass(Myfriend.this,NewFriend.class);
+            startActivity(nextPage);
         }
-    };*/
+    };
 }
