@@ -6,4 +6,5 @@
     <string name="title_activity_find_place">找地點?</string>
     <string name="title_activity_myfriend">好友列表</string>
     <string name="title_activity_new_friend">新增好友</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
