@@ -53,18 +53,18 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:text="找地點?"
+                android:id="@+id/btn_findPlace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_findPlace"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="找地點?" />
 
             <Button
-                android:text="找朋友?"
+                android:id="@+id/btn_findFriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_findFriend"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="找朋友?" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,11 +73,11 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:text="我的朋友"
+                android:id="@+id/btn_myFriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_myFriend"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="我的朋友" />
 
             <Button
                 android:text="我的群組"
