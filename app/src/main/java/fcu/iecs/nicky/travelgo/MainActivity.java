@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent toFindPlacePage = new Intent();
-            toFindPlacePage.setClass(MainActivity.this,MapsActivity.class);
-            startActivityForResult(toFindPlacePage,FindplaceID);
+            toFindPlacePage.setClass(MainActivity.this,FindPlace.class);
+            startActivity(toFindPlacePage);
         }
     };
 

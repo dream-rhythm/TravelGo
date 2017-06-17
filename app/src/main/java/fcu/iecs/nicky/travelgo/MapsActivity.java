@@ -1,16 +1,23 @@
 package fcu.iecs.nicky.travelgo;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback,
@@ -28,8 +35,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
-
+    private double intiMapLatitude,intiMapLongitude, searchMapLatitude,searchMapLongitude;
     private GoogleMap mMap;
+    private LatLng intiLatLng,searchLatLng;
+    private static final String TAG ="MapsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +48,50 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
-        mMap.setOnMyLocationButtonClickListener(this);
+        intiMapLatitude = FindPlace.intiLatitude;
+        intiMapLongitude = FindPlace.intiLongitude;
+        searchMapLatitude = FindPlace.searchLatitude;
+        searchMapLongitude = FindPlace.searchLongitude;
+
+        intiLatLng= new LatLng(intiMapLatitude,intiMapLongitude);
+        searchLatLng = new LatLng(searchMapLatitude,searchMapLongitude);
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);  // 右下角的放大縮小功能
+        mMap.getUiSettings().setCompassEnabled(true);       // 左上角的指南針，要兩指旋轉才會出現
+        mMap.getUiSettings().setMapToolbarEnabled(true);    // 右下角的導覽及開啟 Google Map功能
+
+        Log.d(TAG, "最高放大層級："+mMap.getMaxZoomLevel());
+        Log.d(TAG, "最低放大層級："+mMap.getMinZoomLevel());
+        //標示現在位置
+        MarkerOptions markerOpt = new MarkerOptions();
+        markerOpt.position(intiLatLng);
+        markerOpt.title("尋找位置");
+        markerOpt.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+        map.addMarker(markerOpt).showInfoWindow();
+
+        //標示目標位置
+        MarkerOptions markerOpt2 = new MarkerOptions();
+        markerOpt2.position(searchLatLng);
+        markerOpt2.title("目標位置");
+        markerOpt2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        map.addMarker(markerOpt2).showInfoWindow();
+
+        PolylineOptions polylineOpt = new PolylineOptions();
+        polylineOpt.add(intiLatLng);
+        polylineOpt.add(searchLatLng);
+
+        //線條顏色
+        polylineOpt.color(Color.BLUE);
+        //線條寬度
+        Polyline polyline = map.addPolyline(polylineOpt);
+        polyline.setWidth(10);
         enableMyLocation();
     }
 
@@ -107,4 +153,5 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
+
 }

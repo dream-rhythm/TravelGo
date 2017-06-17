@@ -78,12 +78,13 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB8DG-Rlrnb1XUBbbAME0JoIA6abAR38dc" />
+            android:value="@string/google_maps_key" />
 
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps">
+        </activity>
     </application>
 
 </manifest>
