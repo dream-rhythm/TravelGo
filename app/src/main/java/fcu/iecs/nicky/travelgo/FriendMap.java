@@ -15,7 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.R.id.message;
 
@@ -26,6 +33,7 @@ public class FriendMap extends AppCompatActivity {
     private static final int LOCATION_UPDATE_MIN_DISTANCE = 1000;
     private static final int LOCATION_UPDATE_MIN_TIME = 50;
     WebView myWebView;
+    TextView url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +47,7 @@ public class FriendMap extends AppCompatActivity {
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.requestFocus();
         myWebView.setWebViewClient(new MyWebViewClient());
-
+        url = (TextView)findViewById(R.id.url_save);
 
 
     }
@@ -89,9 +97,31 @@ public class FriendMap extends AppCompatActivity {
             if (location != null) {
                 String my_x = String.format("%f", location.getLatitude());
                 String my_y = String.format("%f", location.getLongitude());
-                myWebView.loadUrl("http://nicky.esy.es/se/index2.html?x_main=24.178828&y_main=120.646438&x_me="+my_x+"&y_me="+my_y);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("UserTable/2/");
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String main_x = (String)dataSnapshot.child("Loc_x").getValue();
+                        String main_y = (String)dataSnapshot.child("Loc_y").getValue();
+                        //Toast.makeText(FriendMap.this,"x="+main_x+" y="+main_y,Toast.LENGTH_LONG).show();
+                        //url.setText("http://nicky.esy.es/se/index2.html?x_main="+main_x+"&y_main="+main_y);
+                        myWebView.loadUrl("http://nicky.esy.es/se/index2.html?x_main="+main_y+"&y_main="+main_x+(String)url.getText());
+                        //Toast.makeText(FriendMap.this,"http://nicky.esy.es/se/index2.html?x_main="+main_y+"&y_main="+main_x+(String)url.getText(),Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+
+                    }
+                });
+
+                //myWebView.loadUrl((String)url.getText()+"&x_me="+my_x+"&y_me="+my_y);
+                url.setText("&x_me="+my_x+"&y_me="+my_y);
                 String msg = String.format("%f, %f", location.getLatitude(), location.getLongitude());
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             } else {
                 // Logger.d("Location is null");
                 Toast.makeText(getApplicationContext(), "Location is null", Toast.LENGTH_SHORT).show();
