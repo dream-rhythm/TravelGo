@@ -24,9 +24,8 @@ public class Myfriend extends AppCompatActivity {
 
         tonewfriend = (Button)findViewById(R.id.btn_newfriend);
         tonewfriend.setOnClickListener(tonewfriend_onclickListener);
-
-
     }
+
   View.OnClickListener tonewfriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
