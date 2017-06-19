@@ -2,7 +2,6 @@ package fcu.iecs.nicky.travelgo;
 
 import android.content.Intent;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +18,10 @@ public class FindPlace extends MapsActivity {
     private Button searchAddressBut,goToMapBut;
     public static String inputSearchAddress,inputIntiAddress;
     public static double intiLatitude,intiLongitude,searchLatitude,searchLongitude;
-    private Location location;
     private Geocoder intiGeocoder,searchGeocoder;
     List<android.location.Address> intiAddresses,searchAddresses;
     private boolean isOk=true;
+    public static int i=0;
 
 
     @Override
@@ -36,7 +35,7 @@ public class FindPlace extends MapsActivity {
         searchAddressBut.setOnClickListener(input_Search_Listener);
         goToMapBut = (Button)findViewById(R.id.gotoMap);
         goToMapBut.setOnClickListener(go_To_Map_Listener);
-
+        i=0;
     }
 
     View.OnClickListener input_Search_Listener = new View.OnClickListener() {
@@ -46,8 +45,8 @@ public class FindPlace extends MapsActivity {
             inputIntiAddress = intiAddress.getText().toString().trim();
 
             if(inputIntiAddress.isEmpty()){
-                intiLatitude=location.getLatitude();
-                intiLongitude=location.getLongitude();
+                intiLatitude=-200;
+                intiLongitude=-200;
             }else{
                 intiGeocoder = new Geocoder(FindPlace.this);
                 try{
@@ -85,17 +84,24 @@ public class FindPlace extends MapsActivity {
                     Intent intent = new Intent();
                     intent.setClass(FindPlace.this,MapsActivity.class);
                     startActivity(intent);
+                    i=1;
                 }
 
             }
+
         }
     };
 
     View.OnClickListener go_To_Map_Listener = new View.OnClickListener(){
         public void onClick(View v){
+            intiLatitude=-300;
+            intiLongitude=-300;
+            searchLatitude = -300;
+            searchLongitude = -300;
             Intent intent = new Intent();
             intent.setClass(FindPlace.this,MapsActivity.class);
             startActivity(intent);
+            i=2;
         }
     };
 }
