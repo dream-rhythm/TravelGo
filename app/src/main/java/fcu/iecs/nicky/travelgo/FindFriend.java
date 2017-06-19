@@ -29,6 +29,14 @@ public class FindFriend extends AppCompatActivity {
                 startActivity(nextpage);
             }
         });
+        FollowMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextpage = new Intent();
+                nextpage.setClass(FindFriend.this,FollowMe.class);
+                startActivity(nextpage);
+            }
+        });
 
 
     }
