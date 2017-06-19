@@ -8,22 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import static fcu.iecs.nicky.travelgo.MainActivity.MyGroupID;
 
 public class Myfriend extends AppCompatActivity {
     Button tonewfriend;
-
+    TextView ShowName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_myfriend);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         tonewfriend = (Button)findViewById(R.id.btn_newfriend);
         tonewfriend.setOnClickListener(tonewfriend_onclickListener);
+        ShowName =(EditText)findViewById(R.id.ShowName);
     }
 
   View.OnClickListener tonewfriend_onclickListener= new View.OnClickListener() {

@@ -8,6 +8,14 @@
     tools:context="fcu.iecs.nicky.travelgo.Myfriend"
     tools:showIn="@layout/activity_myfriend">
 
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="132dp"
         android:layout_height="456dp"
@@ -22,6 +30,12 @@
             android:text="好友數量 0/10"
             tools:layout_editor_absoluteX="263dp"
             tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_newfriend"
