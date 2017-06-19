@@ -66,7 +66,19 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener toFindFriend_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(MainActivity.this,"還沒做!!!",Toast.LENGTH_SHORT).show();
+            /*if(View_UserName.getText().toString().equals("尚未登入")){
+                Intent toNextPage = new Intent();
+                toNextPage.setClass(MainActivity.this,LoginActivity.class);
+                startActivityForResult(toNextPage,LoginActivityID);
+            }
+            else{
+                Intent toFindFriendPage = new Intent();
+                toFindFriendPage.setClass(MainActivity.this,FindFriend.class);
+                startActivity(toFindFriendPage);
+            }*/
+            Intent toFindFriendPage = new Intent();
+            toFindFriendPage.setClass(MainActivity.this,FindFriend.class);
+            startActivity(toFindFriendPage);
         }
     };
 
