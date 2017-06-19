@@ -13,26 +13,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class FriendMap extends AppCompatActivity {
+import static android.R.id.message;
 
+public class FriendMap extends AppCompatActivity {
     private double currentLatitude = 0;
     private double currentLongitude = 0;
     private LocationManager mLocationManager;
     private static final int LOCATION_UPDATE_MIN_DISTANCE = 1000;
     private static final int LOCATION_UPDATE_MIN_TIME = 50;
-
+    WebView myWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_map);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         getCurrentLocation();
+        myWebView = (WebView) findViewById(R.id.MapWebView);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.requestFocus();
+        myWebView.setWebViewClient(new MyWebViewClient());
+
+
 
     }
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+    }
+
+
 
     private void getCurrentLocation() {
         boolean isGPSEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -69,7 +87,9 @@ public class FriendMap extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location location) {
             if (location != null) {
-
+                String my_x = String.format("%f", location.getLatitude());
+                String my_y = String.format("%f", location.getLongitude());
+                myWebView.loadUrl("http://nicky.esy.es/se/index2.html?x_main=24.178828&y_main=120.646438&x_me="+my_x+"&y_me="+my_y);
                 String msg = String.format("%f, %f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             } else {

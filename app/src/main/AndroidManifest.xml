@@ -91,6 +91,10 @@
         <activity
             android:name=".FriendMap"
             android:label="@string/title_activity_friend_map"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FollowMe"
+            android:label="@string/title_activity_follow_me"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
