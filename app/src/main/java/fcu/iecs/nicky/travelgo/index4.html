@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>google maps for Software Engineering</title>
+<meta charset=utf-8>
+<style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+</head>
+
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+//使用方法:nicky.esy.es/se/?x=中心x座標&y=中心y座標
+//預設網址:nicky.esy.es/se/index2.html?x_main=24.178828&y_main=120.646438&x_me=24.187033&y_me=120.644349
+  var strUrl = location.search;
+  var getPara, ParaVal;
+  var aryPara = [];
+  var map;
+  var directionsDisplay;
+  
+  
+  if (strUrl.indexOf("?") != -1) {
+    var getSearch = strUrl.split("?");
+    getPara = getSearch[1].split("&");
+    for (i = 0; i < getPara.length; i++) {
+      ParaVal = getPara[i].split("=");
+      aryPara.push(ParaVal[0]);
+      aryPara[ParaVal[0]] = ParaVal[1];
+    }
+  }
+  else{
+  	window.location.href="http://nicky.esy.es/se/index4.html?x_main=24.178828&y_main=120.646438&x_me=24.187033&y_me=120.644349";
+  }
+
+  
+function initMap() {
+  var latlng = new google.maps.LatLng(aryPara.x_main,aryPara.y_main); 
+  var opt={zoom:18, center:latlng, mapTypeId:"roadmap"};
+  map = new google.maps.Map(document.getElementById('map'), opt);
+  
+  //var m= new google.maps.Marker({map: map,position: latlng,title:"Me"});
+  var setting={
+	                strokeColor: "#c3fc49",
+	                strokeOpacity: 0.8,
+	                strokeWeight: 2,
+	                fillColor: "#c3fc49",
+	                fillOpacity: 0.35,
+	                map: map,
+	                center: latlng,
+	                radius: 0
+	            };
+ 
+  
+  var myLatlng = new google.maps.LatLng(aryPara.x_main,aryPara.y_main);
+  var image = 'http://nicky.esy.es/se/rsz_blue.png'
+				
+  var marker = new google.maps.Marker({
+   	position: myLatlng,
+	icon :image
+    });
+  marker.setMap(map);
+  
+  
+  
+}
+map.setcenter(latlng,8);
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyU_JIg0UmDPEnl_Y5ndYNauL4d_fgHUA&callback=initMap">
+    </script>
+</body>
+</html>

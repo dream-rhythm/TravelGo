@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FollowMe extends AppCompatActivity {
     Button finish;
+    WebView myWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,19 @@ public class FollowMe extends AppCompatActivity {
         });
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         getCurrentLocation();
+        myWebView = (WebView) findViewById(R.id.me_map);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.requestFocus();
+        myWebView.setWebViewClient(new MyWebViewClient());
     }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+    }
+
 
 
     private double currentLatitude = 0;
@@ -89,7 +104,7 @@ public class FollowMe extends AppCompatActivity {
                 myRef.setValue(my_x);
                 myRef = database.getReference("UserTable/1/Loc_y");
                 myRef.setValue(my_y);
-
+                myWebView.loadUrl("http://nicky.esy.es/se/index4.html?x_main="+my_x+"&y_main="+my_y);
                 String msg = String.format("%f, %f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             } else {
