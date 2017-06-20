@@ -37,8 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         newUser.setOnClickListener(newUser_onclickListener);
         InputName = (EditText)findViewById(R.id.input_UserName);
         InputPassword=(EditText)findViewById(R.id.input_Password);
-
-
     }
 
     View.OnClickListener login_onclickListener = new View.OnClickListener() {

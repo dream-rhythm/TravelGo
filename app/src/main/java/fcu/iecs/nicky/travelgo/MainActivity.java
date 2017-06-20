@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         toFindPlace =(Button)findViewById(R.id.btn_findPlace);
         toMyFriend =(Button)findViewById(R.id.btn_myFriend);
         toMyGroup = (Button)findViewById(R.id.btn_myGroup);
+
         View_UserName =(TextView)findViewById(R.id.textView_UserName);
 
         toLogin.setOnClickListener(toLogin_onclickListener);
