@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 Intent toFindFriendPage = new Intent();
+                toFindFriendPage.putExtra("user",View_UserName.getText().toString());
                 toFindFriendPage.setClass(MainActivity.this,FindFriend.class);
                 startActivity(toFindFriendPage);
             }

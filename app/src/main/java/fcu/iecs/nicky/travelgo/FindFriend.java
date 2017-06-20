@@ -15,6 +15,8 @@ public class FindFriend extends AppCompatActivity {
     Button Go;
     Button FollowMe;
     Button back;
+    String user;
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class FindFriend extends AppCompatActivity {
             public void onClick(View v) {
                 Intent nextpage = new Intent();
                 nextpage.setClass(FindFriend.this,FriendMap.class);
+                nextpage.putExtra("friend",spinner.getSelectedItem().toString());
                 startActivity(nextpage);
             }
         });
@@ -45,15 +48,33 @@ public class FindFriend extends AppCompatActivity {
             public void onClick(View v) {
                 Intent nextpage = new Intent();
                 nextpage.setClass(FindFriend.this,FollowMe.class);
+                nextpage.putExtra("user",user);
                 startActivity(nextpage);
             }
         });
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
-        final String[] lunch = {"a25978032", "abcde"};
-        ArrayAdapter<String> lunchList = new ArrayAdapter<>(FindFriend.this,
-                android.R.layout.simple_spinner_dropdown_item,
-                lunch);
-        spinner.setAdapter(lunchList);
+        spinner = (Spinner)findViewById(R.id.spinner);
+        final String[] a22671512 = {"a25978032", "abcde"};
+        final String[] a25978032 = {"abcde","a22671512"};
+        final String[] abcde ={"a22671512","a25978032"};
+        Intent intent = getIntent();
+        user = intent.getStringExtra("user");
+        ArrayAdapter<String> friendList;
+        if(user.equals("a22671512")) {
+            friendList = new ArrayAdapter<>(FindFriend.this,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    a22671512);
+        }
+        else if(user.equals("a25978032")){
+            friendList = new ArrayAdapter<>(FindFriend.this,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    a25978032);
+        }
+        else{
+            friendList = new ArrayAdapter<>(FindFriend.this,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    abcde);
+        }
+        spinner.setAdapter(friendList);
 
 
     }

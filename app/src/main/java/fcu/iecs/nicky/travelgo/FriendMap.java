@@ -1,6 +1,7 @@
 package fcu.iecs.nicky.travelgo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -34,6 +35,7 @@ public class FriendMap extends AppCompatActivity {
     private static final int LOCATION_UPDATE_MIN_TIME = 50;
     WebView myWebView;
     TextView url;
+    String friend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,8 @@ public class FriendMap extends AppCompatActivity {
         myWebView.requestFocus();
         myWebView.setWebViewClient(new MyWebViewClient());
         url = (TextView)findViewById(R.id.url_save);
-
+        Intent intent  = getIntent();
+        friend = intent.getStringExtra("friend");
 
     }
     private class MyWebViewClient extends WebViewClient {
@@ -98,7 +101,10 @@ public class FriendMap extends AppCompatActivity {
                 String my_x = String.format("%f", location.getLatitude());
                 String my_y = String.format("%f", location.getLongitude());
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("UserTable/2/");
+                DatabaseReference myRef;
+                if(friend.equals("a22671512")){myRef = database.getReference("UserTable/1/");}
+                else if(friend.equals("a25978032")){myRef = database.getReference("UserTable/2/");}
+                else{myRef = database.getReference("UserTable/3/");}
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

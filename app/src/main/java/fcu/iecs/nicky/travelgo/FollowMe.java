@@ -1,6 +1,7 @@
 package fcu.iecs.nicky.travelgo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FollowMe extends AppCompatActivity {
     Button finish;
     WebView myWebView;
+    String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,10 @@ public class FollowMe extends AppCompatActivity {
                 finish();
             }
         });
+        Intent intent = getIntent();
+        user = intent.getStringExtra("user");
+
+
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         getCurrentLocation();
         myWebView = (WebView) findViewById(R.id.me_map);
@@ -100,10 +106,17 @@ public class FollowMe extends AppCompatActivity {
                 String my_y = String.format("%f", location.getLongitude());
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                DatabaseReference myRef = database.getReference("UserTable/1/Loc_x");
-                myRef.setValue(my_x);
-                myRef = database.getReference("UserTable/1/Loc_y");
+                DatabaseReference myRef ;
+                if(user.equals("a22671512")){myRef = database.getReference("UserTable/1/Loc_x");}
+                else if(user.equals("a25978032")){myRef = database.getReference("UserTable/2/Loc_x");}
+                else {myRef = database.getReference("UserTable/3/Loc_x");}
+
+
                 myRef.setValue(my_y);
+                if(user.equals("a22671512")){myRef = database.getReference("UserTable/1/Loc_y");}
+                else if(user.equals("a25978032")){myRef = database.getReference("UserTable/2/Loc_y");}
+                else {myRef = database.getReference("UserTable/3/Loc_y");}
+                myRef.setValue(my_x);
                 myWebView.loadUrl("http://nicky.esy.es/se/index4.html?x_main="+my_x+"&y_main="+my_y);
                 String msg = String.format("%f, %f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
