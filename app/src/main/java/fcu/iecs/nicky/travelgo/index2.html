@@ -40,7 +40,7 @@ function initMap() {
   var opt={zoom:18, center:latlng, mapTypeId:"roadmap"};
   map = new google.maps.Map(document.getElementById('map'), opt);
   
-  var m= new google.maps.Marker({map: map,position: latlng,title:"Me"});
+  //var m= new google.maps.Marker({map: map,position: latlng,title:"Me"});
   var setting={
 	                strokeColor: "#c3fc49",
 	                strokeOpacity: 0.8,
@@ -53,11 +53,14 @@ function initMap() {
 	            };
  
   
+  
   var myLatlng = new google.maps.LatLng(aryPara.x_main,aryPara.y_main);
+  /*
   var marker = new google.maps.Marker({
    	position: myLatlng,
     });
   marker.setMap(map);
+  */
   
   
   var directionsService = new google.maps.DirectionsService();
