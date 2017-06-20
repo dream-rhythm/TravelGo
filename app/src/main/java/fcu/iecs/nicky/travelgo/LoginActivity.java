@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener newUser_onclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Toast.makeText(LoginActivity.this,"尚未開放註冊",Toast.LENGTH_SHORT).show();
         }
     };
 

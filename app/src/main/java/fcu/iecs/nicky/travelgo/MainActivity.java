@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener toMyGroup_onclickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(View_UserName.getText().toString().equals("尚未登入")){
+            /*if(View_UserName.getText().toString().equals("尚未登入")){
                 Intent toNextPage = new Intent();
                 toNextPage.setClass(MainActivity.this,LoginActivity.class);
                 startActivityForResult(toNextPage,LoginActivityID);
@@ -112,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 toMyGroupPage.setClass(MainActivity.this,MyGroup.class);
                 toMyGroupPage.putExtra(userName,MyGroupID);
                 startActivity(toMyGroupPage);
-            }
+            }*/
+            Toast.makeText(MainActivity.this,"此功能尚未開放唷",Toast.LENGTH_SHORT).show();
 
         }
     };
