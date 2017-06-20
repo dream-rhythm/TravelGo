@@ -22,6 +22,6 @@
 
     <include layout="@layout/content_friend_map" />
 
-    
+
 
 </android.support.design.widget.CoordinatorLayout>
