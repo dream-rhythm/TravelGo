@@ -24,7 +24,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/Count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="好友數量 0/10"
@@ -32,7 +32,7 @@
             tools:layout_editor_absoluteY="16dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/Account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp" />

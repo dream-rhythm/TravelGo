@@ -53,9 +53,10 @@ public class NewFriend extends AppCompatActivity {
                         }
                     }
                     if(isOk==true){
-                        Intent nextPage = new Intent();
-                        nextPage.setClass(NewFriend.this,Myfriend.class);
-                        startActivity(nextPage);
+                        Intent intent = new Intent();
+                        intent.putExtra("Account",getAccount);
+                        setResult(RESULT_OK,intent);
+                        finish();
                         Toast.makeText(NewFriend.this,"好友加入成功",Toast.LENGTH_LONG).show();
                     }
                     else{
