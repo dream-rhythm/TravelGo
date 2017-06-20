@@ -57,12 +57,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
-    private double locationLatitude,locationLongitude, searchMapLatitude,searchMapLongitude;
-    private double intiMapLatitude,intiMapLongitude;
+    private double locationLatitude,locationLongitude;
     private GoogleMap mMap;
-    private LatLng intiLatLng,searchLatLng,locationLatLng,storge=null;
+    private LatLng intiLatLng,searchLatLng,locationLatLng;
     private static final String TAG ="MapsActivity";
-    private int draw;
+    private int lock;
     String url;
     DownloadTask downloadTask = new DownloadTask();;
 
@@ -74,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                 locationLatitude = location.getLatitude();
                 locationLongitude = location.getLongitude();
                 locationLatLng= new LatLng(locationLatitude,locationLongitude);
-                if((intiMapLatitude == -200 && intiMapLongitude == -200)){
+                if((FindPlace.intiLatitude == -200 && FindPlace.intiLongitude == -200)&&lock==0){
                     //mMap.clear();
                     MarkerOptions markerOpt = new MarkerOptions();
                     markerOpt.position(locationLatLng);
@@ -93,16 +92,16 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                             .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                             .build();                   // Creates a CameraPosition from the builder
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                    if(draw == 0){
-                            url = getDirectionsUrl(locationLatLng,searchLatLng);
-                        downloadTask.execute(url);
-                        draw++;
-                    }
 
+                    searchLatLng = new LatLng(FindPlace.searchLatitude, FindPlace.searchLongitude);
+
+                    url = getDirectionsUrl(locationLatLng,searchLatLng);
+                    downloadTask.execute(url);
+                    lock++;
                 }
 
-                if(((intiMapLatitude == -300 && intiMapLongitude == -300) &&
-                        (searchMapLatitude == -300 && searchMapLongitude == -300))){
+                if(((FindPlace.intiLatitude == -300 &&FindPlace.intiLongitude == -300) &&
+                        ( FindPlace.searchLatitude == -300 && FindPlace.searchLongitude == -300)&& lock==0)){
 
                     //Move the camera instantly to Sydney with a zoom of 15.
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 15));
@@ -118,17 +117,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                             .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                             .build();                   // Creates a CameraPosition from the builder
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    lock++;
                 }
-                /*if((intiMapLatitude != -300 && intiMapLongitude != -300) &&
-                        (searchMapLatitude != -300 && searchMapLongitude != -300)){
+
+                if((FindPlace.intiLatitude != -300 && FindPlace.intiLongitude != -300) &&
+                        ( FindPlace.searchLatitude != -300 && FindPlace.searchLongitude != -300)&&lock==0){
+                    intiLatLng = new LatLng(FindPlace.intiLatitude,FindPlace.intiLongitude);
+                    searchLatLng = new LatLng(FindPlace.searchLatitude,FindPlace.searchLongitude);
                     url = getDirectionsUrl(intiLatLng,searchLatLng);
-                    downloadTask = new DownloadTask();
-                    if(draw == 0){
-                        url = getDirectionsUrl(locationLatLng,searchLatLng);
-                        downloadTask.execute(url);
-                        draw++;
-                    }
-                }*/
+                    downloadTask.execute(url);
+                    lock++;
+                }
             }
 
         }
@@ -182,7 +181,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        draw=0;
+        lock=0;
 
     }
 
@@ -192,13 +191,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         if(FindPlace.i== 0){
 
         }else{
-            intiMapLatitude = FindPlace.intiLatitude;
-            intiMapLongitude = FindPlace.intiLongitude;
-            searchMapLatitude = FindPlace.searchLatitude;
-            searchMapLongitude = FindPlace.searchLongitude;
-
-            intiLatLng = new LatLng(intiMapLatitude,intiMapLongitude);
-            searchLatLng = new LatLng(searchMapLatitude,searchMapLongitude);
+            intiLatLng = new LatLng(FindPlace.intiLatitude, FindPlace.intiLongitude);
+            searchLatLng = new LatLng(FindPlace.searchLatitude,FindPlace.searchLongitude);
 
             mMap.getUiSettings().setZoomControlsEnabled(true);  // 右下角的放大縮小功能
             mMap.getUiSettings().setCompassEnabled(true);       // 左上角的指南針，要兩指旋轉才會出現
@@ -207,8 +201,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
             Log.d(TAG, "最高放大層級："+mMap.getMaxZoomLevel());
             Log.d(TAG, "最低放大層級："+mMap.getMinZoomLevel());
 
-            if((intiMapLatitude != -200 && intiMapLongitude != -200)||
-                    (intiMapLatitude!=-300 && intiMapLongitude!=-300)){
+            if((FindPlace.intiLatitude != -200 && FindPlace.intiLongitude != -200)||
+                    (FindPlace.intiLatitude!=-300 && FindPlace.intiLongitude!=-300)){
                 MarkerOptions markerOpt = new MarkerOptions();
                 markerOpt.position(intiLatLng);
                 markerOpt.title("尋找起始位置");
@@ -216,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                 mMap.addMarker(markerOpt).showInfoWindow();
             }
 
-            if(searchMapLatitude != -300 && searchMapLongitude != -300){
+            if(FindPlace.searchLatitude != -300 && FindPlace.searchLongitude != -300){
                 MarkerOptions markerOpt2 = new MarkerOptions();
                 markerOpt2.position(searchLatLng);
                 markerOpt2.title("目的地");
@@ -495,7 +489,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(5);  //導航路徑寬度
+                lineOptions.width(10);  //導航路徑寬度
                 lineOptions.color(Color.BLUE); //導航路徑顏色
 
             }
